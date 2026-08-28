@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Фото менеджера — заглушка">
+  <rect width="200" height="200" fill="#f0e0c6"/>
+  <circle cx="100" cy="78" r="34" fill="#c9a878"/>
+  <path d="M28 190c0-38 32-62 72-62s72 24 72 62z" fill="#c9a878"/>
+  <text x="100" y="176" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#7a5c33">ФОТО</text>
+</svg>

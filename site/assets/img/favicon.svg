@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Защитинский элеватор">
+  <rect width="64" height="64" rx="14" fill="#a0553f"/>
+  <g fill="#f6cb9e" transform="translate(32 32) scale(0.46) translate(-100 -103)">
+    <path d="M100 68c7 12 7 26 0 36-7-10-7-24 0-36z"/>
+    <path d="M100 106c-10-2-20-10-24-22 12 1 21 10 24 22z"/>
+    <path d="M100 106c10-2 20-10 24-22-12 1-21 10-24 22z"/>
+    <path d="M100 126c-10-2-20-10-24-22 12 1 21 10 24 22z"/>
+    <path d="M100 126c10-2 20-10 24-22-12 1-21 10-24 22z"/>
+    <rect x="97.6" y="100" width="4.8" height="42" rx="2.4"/>
+  </g>
+</svg>
