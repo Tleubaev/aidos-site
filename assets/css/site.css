@@ -755,6 +755,17 @@ html[data-lang="kk"] [lang="ru"] { display: none !important; }
 
 /* ---------- Адаптив ---------- */
 
+/* Логотип + пять пунктов меню + язык + телефон + кнопка WhatsApp перестают
+   помещаться раньше, чем включается мобильная шапка на 900 px. Телефон в
+   шапке — самый необязательный элемент: он продублирован в подвале и в
+   липкой панели, поэтому убираем его первым. */
+@media (max-width: 1100px) {
+    .header__phone { display: none; }
+    .header__inner { gap: 14px; }
+    .nav a { padding: 8px 9px; font-size: 14px; }
+    .logo__name { font-size: 14px; }
+}
+
 @media (max-width: 1080px) {
     .grid-products { grid-template-columns: repeat(3, 1fr); }
     .features { grid-template-columns: repeat(2, 1fr); }
@@ -764,7 +775,39 @@ html[data-lang="kk"] [lang="ru"] { display: none !important; }
 @media (max-width: 900px) {
     .header__phone { display: none; }
     .header__side .btn { display: none; }
-    .burger { display: inline-flex; }
+
+    /* Логотип обязан ужиматься: иначе он выдавливает язык и бургер за экран
+       и вся страница едет вбок. Название переносится на две строки. */
+    .header__inner { gap: 12px; min-height: 62px; }
+    .logo { flex-shrink: 1; min-width: 0; gap: 10px; }
+    .logo > span { min-width: 0; }
+    .logo br { display: none; }
+    .logo__mark { height: 38px; }
+    .logo__name { font-size: 13px; letter-spacing: .02em; }
+    .logo__since { display: none; }
+
+    .header__side { gap: 8px; }
+
+    /* Тап-цели 44 px. У .lang рамка 1 px с каждой стороны — контейнеру нужно 46,
+       чтобы сама кнопка внутри получилась 44. */
+    .lang { min-height: 46px; }
+    .lang button { padding: 0 11px; }
+    .btn--sm { min-height: 44px; }
+    .filters button { min-height: 44px; }
+    .burger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0;
+    }
+    .footer li a,
+    .contact-list a { display: inline-block; padding: 12px 0; }
+    .footer li { margin-bottom: 0; }
+    /* Хлебные крошки оставлены на 36 px: это вторичная навигация, порог WCAG
+       (24 px) пройден, а 44 px раздули бы строку над заголовком товара. */
+    .crumbs a { display: inline-block; padding: 7px 0; }
     .nav {
         display: none;
         position: absolute;
@@ -804,10 +847,12 @@ html[data-lang="kk"] [lang="ru"] { display: none !important; }
     .steps { grid-template-columns: 1fr; }
     .footer__grid { grid-template-columns: 1fr 1fr; }
 
-    /* Липкая панель действий */
+    /* Липкая панель действий.
+       Колонки неравные, шрифт мельче: иначе «Написать в WhatsApp» переносится
+       на две строки, панель вырастает до 93 px и прячет под собой контент. */
     .mobile-bar {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.7fr 1fr;
         gap: 8px;
         position: fixed;
         left: 0; right: 0; bottom: 0;
@@ -817,7 +862,12 @@ html[data-lang="kk"] [lang="ru"] { display: none !important; }
         backdrop-filter: blur(8px);
         border-top: 1px solid var(--line);
     }
-    body { padding-bottom: 76px; }
+    .mobile-bar .btn {
+        font-size: 14px;
+        padding: 11px 10px;
+        white-space: nowrap;
+    }
+    body { padding-bottom: 78px; }
 }
 
 @media (max-width: 680px) {
@@ -843,14 +893,49 @@ html[data-lang="kk"] [lang="ru"] { display: none !important; }
         padding: 14px;
     }
     .pack-table td { border: 0; padding: 2px 0; }
-    .pack-table .pack__cta { text-align: left; padding-top: 12px; }
+    /* width: auto обязателен — иначе десктопное `.pack-table .pack__cta { width: 1% }`
+       перебивает `.pack-table td { width: 100% }` по специфичности и ячейка с
+       кнопкой «Заказать» схлопывается в несколько пикселей. */
+    .pack-table .pack__cta {
+        width: auto;
+        text-align: left;
+        padding-top: 12px;
+        white-space: normal;
+    }
     .pack-table .pack__cta .btn { width: 100%; }
+
+    /* Характеристики: подпись над значением, иначе значение зажато в узкую колонку */
+    .specs tr { display: block; border-bottom: 1px solid var(--line); }
+    .specs tr:last-child { border-bottom: 0; }
+    .specs th, .specs td { display: block; width: auto; border: 0; }
+    .specs th { padding: 12px 16px 0; font-size: 13px; }
+    .specs td { padding: 1px 16px 12px; }
 
     .price-table { font-size: 14px; }
     .price-table th, .price-table td { padding: 10px 12px; }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+    /* Контакты: подпись над значением. Фиксированные 116 px у подписи плюс
+       длинный e-mail не помещались в карточку на узких экранах. */
+    .contact-list li { flex-direction: column; gap: 2px; }
+    .contact-list .k { min-width: 0; }
+    .contact-list .v { overflow-wrap: anywhere; }
+    .info-card { padding: 18px; }
+}
+
+@media (max-width: 420px) {
+    /* Прайс в четыре колонки не влезает в 320 px. Прячем «за кг» — величина
+       вспомогательная и остаётся на странице товара. */
+    .price-table th:nth-child(3),
+    .price-table td:nth-child(3) { display: none; }
+    .price-table th, .price-table td { padding: 10px 8px; }
+}
+
+/* Одна колонка — только на совсем узких экранах. Порог 400 px разводил
+   обычные телефоны по разным раскладкам: 375 (SE, 13 mini) получал одну
+   колонку, а 390-430 — две. */
+@media (max-width: 359px) {
     .grid-products { grid-template-columns: 1fr; }
 }
 
