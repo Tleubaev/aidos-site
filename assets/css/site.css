@@ -385,7 +385,9 @@ html[data-lang="kk"] [lang="ru"] {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 44px;
   align-items: center;
-  padding: 56px 0;
+  /* Только вертикальный отступ: сокращение `padding: 56px 0` обнуляло
+     горизонтальные 20px, заданные в .wrap, и герой прилипал к краям экрана. */
+  padding-block: 56px;
 }
 .hero h1 {
   margin-bottom: 0.35em;
@@ -661,8 +663,8 @@ html[data-lang="kk"] [lang="ru"] {
 .product__media img {
   max-height: 460px;
   width: auto;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 -3px 20px rgba(43, 33, 25, 0.16);
+  /* border-radius: 8px 8px 0 0;
+  box-shadow: 0 -3px 20px rgba(43, 33, 25, 0.16); */
 }
 .product__head {
   margin-bottom: 18px;
@@ -1117,7 +1119,7 @@ html[data-lang="kk"] [lang="ru"] {
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 26px;
-    padding: 34px 0;
+    padding-block: 34px;
   }
   .hero__media {
     order: -1;
@@ -1188,7 +1190,7 @@ html[data-lang="kk"] [lang="ru"] {
     right: 0;
     bottom: 0;
     z-index: 50;
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(8px);
     border-top: 1px solid var(--line);
